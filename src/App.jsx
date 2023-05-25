@@ -9,6 +9,7 @@ import {AuthProvider} from "./Config/auth";
 import Footer from "./Components/Footer";
 
 import Registro from "./Pages/Signup";
+import MyUser from "./Pages/MyUser";
 import Detalle from "./Pages/Detalle";
 import Login from "./Pages/Login";
 import NavBarMenu from "./Components/NavBarMenu";
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Registro />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/myuser" element={<MyUser />} />
           <Route path="/producto/:id" element={<Detalle />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

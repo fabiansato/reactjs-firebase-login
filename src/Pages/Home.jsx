@@ -1,19 +1,43 @@
-//Componente tipo funcion
-import Productos from "../Components/Productos";
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "../Config/firebase";
 
-
-
-
 const Home = () => {
-  console.log(firebase);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    // Limpiar la suscripción cuando se desmonta el componente
+    return () => unsubscribe();
+  }, []);
+
+  const handleSignOut = () => {
+    firebase.auth().signOut()
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => {
+        console.error("Error signing out: ", error);
+      });
+  }
+console.log(user);
   return (
     <>
-      <h1>Home</h1>
-      <button onClick={() => firebase.auth().signOut()}>Sign Out</button>
-     {/*  <Productos /> */}
+ 
+      {user ? (
+        <div>
+          <h2>Bienvenido {user.displayName} a nuestra página</h2>
+          <button onClick={handleSignOut}>Salir</button>
+        </div>
+      ) : (
+        <h2>Por favor registrate o loguéate</h2>
+      )}
     </>
   );
 }
