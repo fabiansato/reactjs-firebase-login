@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase, { storage, firestore } from "../Config/firebase";
 
-const MyUser = () => {
+const MyUserChanges = () => {
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
 
@@ -81,6 +81,8 @@ const MyUser = () => {
             <img src={user.photoURL} alt="avatar" width="100" height="100" />
      
 
+            <p>Cambia tu Avatar:</p>
+            <input type="file" onChange={handleUpload} />
             </>
           ) : (
             <>
@@ -98,4 +100,4 @@ const MyUser = () => {
   );
 }
 
-export default MyUser;
+export default MyUserChanges;
